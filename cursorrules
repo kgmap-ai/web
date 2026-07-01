@@ -1,0 +1,102 @@
+# Antigravity Tasarım İlkeleri ve Kuralları
+
+Bu dosya, projede oluşturulan tüm web siteleri için geçerli olan estetik, tasarım ve teknik standartları içerir. Antigravity bu kurallara HER ZAMAN uymalıdır.
+
+## Tasarım Düşüncesi
+
+Kod yazmadan ÖNCE, bağlamı anla ve CESUR bir estetik yön seç:
+- **Amaç:** Bu arayüz hangi sorunu çözüyor? Kim kullanacak?
+- **Ton:** Bir uç seç ve tam uygula: brutalist minimal, maksimalist kaos, retro-fütüristik, organik/doğal, lüks/rafine, oyuncu, editorial/dergi, brutalist/ham, art deco/geometrik, soft/pastel, endüstriyel...
+- **Farklılaşma:** Bu siteyi UNUTULMAZ yapan ne?
+
+## AI Slop YASAK
+
+Generic AI çıktısı gibi görünen tasarımlar başarısızlık sayılır.
+
+### Kesinlikle Yasak Olanlar:
+- **Fontlar:** Inter, Roboto, Arial, system-ui kullanma.
+- **Renkler:** Mor gradient (#7c3aed → #3b82f6) beyaz üzerine kullanma. Default Tailwind paletini (blue-600 vb.) ana renk yapma.
+- **Layoutlar:** Sıradan 3 kartlık grid ve her şeyi ortalama düzeninden kaçın.
+- **Patternler:** `transition-all` kullanma, düz `shadow-md` kullanma.
+
+## Teknik Standartlar
+
+### Renkler & Gölgeler
+- Custom brand rengi seç ve ondan türet. Default Tailwind paleti KULLANMA.
+- Katmanlı, renk tonlu (color-tinted) shadow'lar kullan:
+  ```css
+  box-shadow:
+    0 1px 2px rgba(var(--shadow-color), 0.04),
+    0 4px 8px rgba(var(--shadow-color), 0.06),
+    0 12px 24px rgba(var(--shadow-color), 0.08);
+  ```
+
+### Tipografi
+- Başlık ve gövde için FARKLI fontlar kullan. Display/serif + clean sans eşleştir.
+- Google Fonts'tan karakterli fontlar seç (Örn: Playfair Display, Syne, Cabinet Grotesk).
+- Başlıklarda `letter-spacing: -0.03em`, gövdede `line-height: 1.7` kullan.
+
+### Gradientler & Arka Plan
+- Tek düz gradient yerine birden fazla radial gradient katmanla.
+- SVG noise filter ile grain/texture ekle:
+  ```css
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  ```
+
+### Animasyonlar
+- Sadece `transform` ve `opacity` animate et. `transition-all` YASAK.
+- Spring-style easing kullan: `cubic-bezier(0.34, 1.56, 0.64, 1)`.
+- IntersectionObserver ile scroll-triggered reveal (staggered delay) kullan.
+
+### Etkileşim Durumları (Interactive States)
+Her tıklanabilir element'te hover, focus-visible ve active state'leri OLMALI:
+- **Hover:** Sadece opacity değil → transform, color shift, clip-path, scale değişimleri kullan.
+- **Focus-visible:** Erişilebilirlik için belirgin ve stilize outline.
+- **Active:** Hafif scale-down (0.95 gibi) veya renk doygunluğu değişimi.
+
+### Derinlik (Depth)
+Sayfadaki yüzeyler (surfaces) bir katmanlama sistemine sahip olmalı:
+- **Base:** Ana arka plan.
+- **Elevated:** Kartlar, paneller (`translateZ` veya shadow ile yükseltilmiş).
+- **Floating:** Modal, tooltip, dropdown (belirgin shadow + yüksek z-index).
+
+### Tek Dosya Kuralı
+- Her site tek bir `index.html` dosyasında olmalı. CSS ve JS inline (etiket içinde) olmalı.
+- Framework YASAK (Tailwind, React vb. kullanma). Saf HTML, CSS ve JS.
+
+### İkonlar ve Görseller
+- **İkonlar:** Lucide Icons (inline SVG) veya custom SVG çiz. Font Awesome YASAK.
+- **Görseller:** Unsplash URL'leri placeholder olarak kullanılmalı. Format: `https://images.unsplash.com/photo-XXXXX?w=800&q=80`. Her görselde anlamlı `alt` metni.
+- **Favicon:** Inline SVG favicon kullanma: `<link rel="icon" href="data:image/svg+xml,...">`.
+
+### Teknik Detaylar
+- **Breakpoint'ler:** Sadece `768px` (tablet) ve `1024px` (desktop) yeterlidir.
+- **Performans:** Lighthouse skoru 90+ olmalı. `loading="lazy"`, `font-display: swap`, `defer` script kullanımı zorunludur.
+
+## İçerik ve Kalite
+- Tüm içerik Türkçe olmalı.
+- **Lorem ipsum YASAK.** Gerçekçi ve bağlama uygun içerikler yaz.
+- CTA butonları (Hemen Başla vb.) her zaman belirgin ve animasyonlu olmalı.
+- Mobilde kusursuz görünmeli (Mobile-first).
+
+## Kalite Kontrol Soruları
+Siteyi bitirdikten sonra kendine sor:
+1. "Bunu insan bir tasarımcı yaptı" denilir mi?
+2. Font ve renkler "AI standardı" mı yoksa özel mi?
+3. Sitede şaşırtıcı bir detay veya sürpriz var mı?
+4. `transition-all` veya flat shadow gibi tembel tercihler var mı?
+
+## Ekran Görüntüsü İş Akışı (Screenshot Workflow)
+
+Tasarımın doğruluğunu kanıtlamak için bu iş akışını uygula:
+- **Tarayıcıyı Kullan:** Siteyi oluşturduktan sonra tarayıcıda aç ve ekran görüntüsü al.
+- **Analiz Et:** Ekran görüntüsünü inceleyerek (referans varsa) referansla karşılaştır.
+- **SPESİFİK Ol:** Karşılaştırırken genel cümleler yerine teknik detaylara odaklan: "başlık 32px ama referansta ~24px görünüyor", "kart boşluğu (gap) 16px ama 24px olmalı".
+- **Kontrol Listesi:**
+  - Spacing (boşluklar) ve Padding
+  - Font boyutu (size), ağırlığı (weight) ve satır yüksekliği (line-height)
+  - Renkler (tam HEX kodları)
+  - Hizalama (alignment)
+  - Kenar yumuşatma (border-radius) ve gölgeler (shadows)
+  - Görsel boyutları ve oranları
+- **Düzelt ve Tekrarla:** Uygunsuzlukları düzelttikten sonra tekrar ekran görüntüsü al ve fark kalmayana kadar (en az 2 tur) devam et.
