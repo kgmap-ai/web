@@ -2,9 +2,24 @@ import React from 'react';
 import { Quote } from 'lucide-react';
 
 const reviews = [
-  { id: 1, name: "Elif S.", role: "Moda Tasarımcısı", text: "Stüdyo maliyetlerini sıfıra indirerek harika katalog çekimleri elde ettik. Yapay zeka ile bu kadar gerçekçi sonuçlar alacağımızı tahmin etmiyordum." },
-  { id: 2, name: "Canan Y.", role: "E-Ticaret Yöneticisi", text: "Ürünlerimizi farklı mekanlarda saniyeler içinde görselleştirmeleri inanılmaz. Satışlarımızda gözle görülür bir artış oldu." },
-  { id: 3, name: "Ahmet K.", role: "Ajans Kurucusu", text: "Hızlı, profesyonel ve kesinlikle premium bir hizmet. Sosyal medya içeriklerimiz artık çok daha kaliteli." },
+  {
+    id: 1,
+    name: "Ebru Ş.",
+    role: "Butik Kurucusu",
+    text: "KG-MAP AI Studio ile çalışmak, butik koleksiyon çekimlerimizde devrim yarattı. Dijital modellerin gerçekçiliği ve kumaş dokularındaki detaylar gerçekten büyüleyici."
+  },
+  {
+    id: 2,
+    name: "Sarah A.",
+    role: "Fashion Creative Director",
+    text: "The digital model production provided by KG-MAP AI is impeccable. It perfectly captured our brand's modest elegance and saved us months of physical photoshoot planning."
+  },
+  {
+    id: 3,
+    name: "فاطمة م.",
+    role: "مؤسسة علامة تجارية",
+    text: "بفضل خدمات KG-MAP AI، تحولت تجربة عرض مجموعتنا إلى مستوى جديد من الرقي الرقمي. الجودة والتفاصيل تفوق التوقعات."
+  },
 ];
 
 const Testimonials = () => {
@@ -16,9 +31,9 @@ const Testimonials = () => {
         <p className="subtitle">Referanslarımız</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16 max-w-6xl mx-auto px-6">
         {reviews.map(review => (
-          <div key={review.id} className="flex flex-col group">
+          <div key={review.id} className="flex flex-col group" dir={review.id === 3 ? "rtl" : "ltr"}>
             <Quote className="text-gold/30 mb-8 group-hover:text-burgundy transition-colors duration-500" size={48} strokeWidth={1} />
             <p className="text-title font-heading text-xl md:text-2xl font-light mb-10 leading-relaxed italic flex-grow">
               "{review.text}"

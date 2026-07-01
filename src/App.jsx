@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import Process from './components/Process';
+import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
       <div id="hizmetler"><Services /></div>
       <div id="portfolyo"><Portfolio /></div>
       <div id="sürecimiz"><Process /></div>
+      <div id="referanslar"><Testimonials /></div>
       <div id="iletişim"><Footer /></div>
     </main>
   );
