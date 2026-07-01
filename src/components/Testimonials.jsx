@@ -24,27 +24,27 @@ const reviews = [
 
 const Testimonials = () => {
   return (
-    <section className="section border-t border-gold/20">
-      <div className="flex flex-col items-center mb-24">
-        <h2 className="title">Müşteri Yorumları</h2>
-        <div className="w-px h-24 bg-gold mt-12 mb-8"></div>
-        <p className="subtitle">Referanslarımız</p>
-      </div>
+    <section className="py-24 bg-[#E5DACE]/20 px-16">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="mb-20">
+          <p className="text-[#3D0A0F] text-[11px] uppercase tracking-[4px] mb-4">Referanslarımız</p>
+          <h2 className="text-[3rem] font-serif text-[#3D0A0F]">Müşteri Memnuniyeti</h2>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16 max-w-6xl mx-auto px-6">
-        {reviews.map(review => (
-          <div key={review.id} className="flex flex-col group" dir={review.id === 3 ? "rtl" : "ltr"}>
-            <Quote className="text-gold/30 mb-8 group-hover:text-burgundy transition-colors duration-500" size={48} strokeWidth={1} />
-            <p className="text-title font-heading text-xl md:text-2xl font-light mb-10 leading-relaxed italic flex-grow">
-              "{review.text}"
-            </p>
-            <div>
-              <div className="w-12 h-px bg-burgundy mb-4"></div>
-              <h4 className="text-title font-medium tracking-widest uppercase text-sm">{review.name}</h4>
-              <p className="text-desc font-light text-sm mt-2 tracking-wide">{review.role}</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16">
+          {reviews.map(review => (
+            <div key={review.id} className="flex flex-col border-l border-[#3D0A0F]/20 pl-8 group" dir={review.id === 3 ? "rtl" : "ltr"}>
+              <Quote className="text-[#3D0A0F]/20 mb-8 group-hover:text-[#3D0A0F] transition-colors duration-500" size={40} strokeWidth={1} />
+              <p className="text-[#3D0A0F]/80 font-serif text-lg md:text-xl mb-10 leading-relaxed italic flex-grow">
+                "{review.text}"
+              </p>
+              <div>
+                <h4 className="text-[#3D0A0F] font-serif text-lg">{review.name}</h4>
+                <p className="text-[#3D0A0F]/60 text-[13px] mt-1 tracking-wide uppercase">{review.role}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
